@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  
+    <!-- aos css file cdn link  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    />
+
+    <!-- magnific popup css cdn link  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
+    />
+
+    <!-- bootstrap cdn link  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+    />
+
+    <!-- font awesome cdn link  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="../static/css/main.css" />
+
+    <script
+      src="https://kit.fontawesome.com/b705027cc2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <!-- header section starts  -->
+
+    <header>
+      <div class="container">
+        <a href="#" class="logo"><span>D</span>ISCOVR <span>DSCOVR</span></a>
+
+        <nav class="nav">
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">More Details</a></li>
+            <li><a href="#scentence-checker">Prediction</a></li>
+            <li><a href="#contact">Contact us</a></li>
+          </ul>
+        </nav>
+
+        <div class="fas fa-bars"></div>
+      </div>
+    </header>
+
+    <!-- header section ends  -->
+
+    <!-- home section starts  -->
+
+    <section class="home" id="home">
+      <div class="container">
+        <div class="row min-vh-100 align-items-center text-center text-md-left">
+          <div class="col-md-6 pr-md-5" data-aos="zoom-in">
+            <img src="../static/source/Earth.png" width="100%" alt="" />
+          </div>
+          <div class="col-md-6 pl-md-5 content" data-aos="fade-left">
+            <h1><span>stay</span> safe,</h1>
+            <h3>away from geomagnatic storm </h3>
+            <a href="#about"><button type="button"  class="btn btn-primary btn-lg button1">learn more</button></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- home section ends -->
+
+    <!-- about section start  -->
+
+    <section class="about" id="about">
+      <div class="container">
+        <div class="row min-vh-100 align-items-center"> 
+          <div class="col-md-6 content" data-aos="fade-right">
+            <div class="box">
+              <h3><i class="fa-solid fa-user-astronaut fa-beat"></i></i> What's Geomagnatic Storm</h3>
+              <p>
+                A geomagnetic storm is a major disturbance of Earth's magnetosphere that occurs when there is a 
+                very efficient exchange of energy from the solar wind into the space environment surrounding Earth.
+              </p>
+            </div>
+
+            <div class="box">
+              <h3> <i class="fa-solid fa-rocket fa-beat"></i></i>Why it's Danger</h3>
+              <p>
+                Geomagnatic storms make it diffcult or impossible and global-positioning system (GPS) communications can be degraded.
+              </p>
+              <p>
+                satellite electronics can be damaged through the build up and discharge of static-electric charges.
+                Astronauts and high altitude pilots can be subjected to increased levels of radiation.</p>
+                <p>
+                  they make high voltage surges in power grids that can make breakouts.
+                </p>
+            </div>
+            <div class="box">
+              <h3> <i class="fa-solid fa-circle-question fa-beat"></i>What indicates</h3>
+              <p>
+                Geomagnatic storms can be measuremed / detected through Kp index of earth.
+                Kp index can be predicted from DSCOVR data.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 d-none d-md-block" data-aos="fade-left">
+            <img src="../static/source/astronaut.png" width="100%" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- about section ends -->
+
+   
+
+
+    <!-- contact section starts  -->
+
+    <section class="contact" id="scentence-checker">
+      <div class="container min-vh-100">
+        <div class="row justify-content-center">
+          <h1 class="heading">
+            <span></span> Prediction <span></span>
+          </h1>
+          <!-- <div class="col-md-10" data-aos="flip-down">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg button1"
+              id="ClassifierPredict"
+            >
+              See Upcoming Predictions
+            </button>
+        </div> -->
+      </div>
+      <form id="dateForm">
+        <span id="dateId" for="dateInput">Select a Date:</label>
+        <input type="date" id="dateInput">
+      </form>
+      <div id="plot">
+      </div>
+      </div>
+    </section>
+
+    <section class="footer" id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4" data-aos="fade-right">
+            <a href="#" class="logo"
+              ><span>D</span>ISCOVER <span>DSCOVR</span></a
+            >
+            <p>
+              In our website, we apply the principles of statistics and
+              probability plus machine learning on Nasa DSCOVR Datasets for better life
+            </p>
+          </div>
+
+          <div class="col-md-4 text-center" data-aos="fade-up">
+            <h3>links</h3>
+            <a href="#home">home</a>
+            <a href="#about">about</a>
+            <a href="#scentence-checker">Check Storms</a>
+          </div>
+
+          <div class="col-md-4 text-center" data-aos="fade-left">
+            <h3>share</h3>
+            <a href="#">facebook</a>
+            <a href="#">instagram</a>
+            <a href="#">Github</a>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="credit text-center mx-auto">
+        created by Four engineers aspiring to make a change
+      </h1>
+    </section>
+
+    <!-- footer section ends -->
+
+    <!-- jquery cdn link  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- magnific popup js link  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+    <!-- aos js file cdn link  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <!-- custom js link  -->
+    <script src="../static/js/main.js"></script>
+    <script src="../static/js/plot.js"></script>
+
+
+    <script
+      src="{{ url_for('static', filename='js/data_predication.js') }}"
+      type="text/javascript"
+    ></script>
+
+    <script>
+      AOS.init({
+        duration: 1000,
+        delay: 400,
+      });
+    </script>
+  </body>
+</html>
