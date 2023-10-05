@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+
+    <!-- aos css file cdn link  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    />
+
+    <!-- magnific popup css cdn link  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
+    />
+
+    <!-- bootstrap cdn link  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+    />
+
+    <!-- font awesome cdn link  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="../static/css/static.css" />
+
+    <script
+      src="https://kit.fontawesome.com/b705027cc2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <!-- header section starts  -->
+
+    <header>
+      <div class="container">
+        <a href="#" class="logo"><span>D</span>ISCOVER <span>DSCOVER</span></a>
+
+        <nav class="nav">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#solution">Challenge & Solution</a></li>
+            <li><a href="#process">The Process</a></li>
+            <li><a href="#dataProcessing">Data Processing</a></li>
+            <li><a href="#contact">Contact us</a></li>
+          </ul>
+        </nav>
+
+        <div class="fas fa-bars"></div>
+      </div>
+    </header>
+
+    <!-- header section ends  -->
+
+    <!-- home section starts  -->
+
+        <!-- Section divided into two vertical sections with dashed curved borders -->
+        <section class="home" id="solution">
+          <div class="container">
+              <div class="row min-vh-100 align-items-center text-center text-md-left">
+                  <!-- First vertical section -->
+                  <div class="col-md-6 pr-md-5" data-aos="fade-right">
+                      <div>
+                          <h1 style="font-size: 3rem; color: var(--black);">The Challenge</h1>
+                          <p style="font-size: 1.7rem; color: var(--black);">
+                            The challange is to develop a machine learning pipeline to predict the probability of the solar storm event.</p>
+                      </div>
+                      <div class="dashed-curved-border">
+                        <h1 style="font-size: 3rem; color: var(--black);">Our Approach</h1>
+                          <p style="font-size: 1.7rem; color: var(--black);">
+                            Our approach involves transforming DSCOVR raw data into more relevant information for kp prediction,
+                            with a focus on employing neural networks.
+                            Our proposed steps to implement this solution are as follows: 
+                            (1)Preprocess DSCOVR raw data and convert it into more structured formats. 
+                            (2)Train a model connecting DSCOVR data with WIND data. 
+                            (3)Develop a forecasting model. 
+                            (4)Train the main model using data from the two models to predict the kp index.
+                            (5)Create a user-friendly website for easy access to predicted kp index information for upcoming days.
+
+                          </p>
+                      </div>
+                  </div>
+                  
+                  <!-- Second vertical section -->
+                  <div class="col-md-6 pl-md-5 " data-aos="fade-left">
+                    <img src="../static/source/DSCOVR.png" width="100%" class="image-with-padding" alt="" />
+                  </div>
+              </div>
+          </div>
+      </section>
+
+    <!-- home section ends -->
+
+    <!-- about section start  -->
+
+    <section class="about" id="process">
+      <div class="container">
+        <div class="row min-vh-100 align-items-center"> 
+          <div class="col-md-8 d-none d-md-block" data-aos="fade-left">
+            <h1 style="font-size: 3rem; color: var(--black);">Our Pipeline</h1>
+            <img src="../static/source/Nasa001.png" width="100%" alt=""  class="image-with-margin"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- about section ends -->
+
+   
+
+
+    <!-- contact section starts  -->
+
+    <section class="contact" id="dataProcessing">
+      <div class="container min-vh-150">
+        <div class="row justify-content-center">
+
+          <!-- First image -->
+          <div class="col-md-7 image-container">
+            <h1>Data Processing</h1>
+            <img src="../static/source/Nasa-Page-0.png" alt="Image 1">
+          </div>
+    
+          <!-- Second image -->
+          <div class="col-md-7 image-container">
+            <img src="../static/source/Nasa-Page-0.png" alt="Image 2">
+          </div>
+    
+          <!-- Third image -->
+          <div class="col-md-7 image-container">
+            <img src="../static/source/Nasa-Page-0.png" alt="Image 3">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer" id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4" >
+            <a href="#" class="logo">
+              <span>D</span>ISCOVER <span>DSCOVR</span></a>
+            <p>
+              In our website, we apply the principles of statistics and
+              probability plus machine learning on Nasa Datasets for better life.
+            </p>
+          </div>
+
+          <div class="col-md-4 text-center" >
+            <h3>Links</h3>
+            <a href="#home">Home</a>
+            <a href="#soltuion">Challenge & Solution</a>
+            <a href="#process">The Process</a>
+            
+          </div>
+
+          <div class="col-md-4 text-center" >
+            <h3>Share</h3>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Github</a>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="credit text-center mx-auto">
+        Created by Three engineers aspiring to make a change.
+      </h1>
+    </section>
+
+    <!-- footer section ends -->
+
+    <!-- jquery cdn link  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- magnific popup js link  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+    <!-- aos js file cdn link  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <!-- custom js link  -->
+    <script src="../static/js/main.js"></script>
+
+    <script
+      src="{{ url_for('static', filename='js/data_predication.js') }}"
+      type="text/javascript"
+    ></script>
+
+    <script>
+      AOS.init({
+        duration: 1000,
+        delay: 400,
+      });
+    </script>
+  </body>
+</html>
