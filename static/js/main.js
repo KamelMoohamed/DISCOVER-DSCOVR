@@ -34,3 +34,11 @@ document.addEventListener("DOMContentLoaded", function () {
     //TODO: Add action when date is chosen
   });
 });
+
+var currentDate = new Date();
+
+// Format the current date as yyyy-mm-dd (required for the input type="date")
+var formattedDate = currentDate.toISOString().substr(0, 10);
+
+// Set the maximum date for the input element
+document.getElementById("dateInput").setAttribute("max", formattedDate);

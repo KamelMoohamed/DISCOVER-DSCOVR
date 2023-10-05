@@ -1,10 +1,11 @@
 import os
 import atexit
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, jsonify
 import datetime
 import data
-
+# import tensorflow as tf
 from apscheduler.schedulers.background import BackgroundScheduler
+import pandas as pd
 
 
 app = Flask(__name__, template_folder="templetes")
@@ -12,7 +13,7 @@ app = Flask(__name__, template_folder="templetes")
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('homeclass.html')
+    return render_template('main.html')
 
 
 @app.route('/predication', methods=['POST', 'GET'])
@@ -22,11 +23,21 @@ def predict():
     # data = d.predict()
     # return data[0]
 
+@app.route('/forcast/<date>/<size>', methods=['GET'])
+def forcast_api(date,size):
+    # model = tf.keras.models.load_model('models\forecasting_model.h5')
+    df = pd.read_csv(f'downloads/processed/{date}.csv')
+    df.drop(columns='dsc_time', axis = 1, inplace = True)
+    columns = df.columns
+    # output = data.forcast_data(df.values[-70:],size)
+    output = df.values[-70:]
+    return jsonify({"columns name": columns.to_list(),'data' :output.tolist()})
 
 
 def update_data():
     current_date = datetime.date.today()
-    formatted_date = current_date.strftime("%Y-%m-%d")
+    yesterday = current_date - datetime.timedelta(days=1)
+    formatted_date = yesterday.strftime("%Y-%m-%d")
     scheduler = BackgroundScheduler()
     scheduler.add_job(func=data.ftech_data(formatted_date), trigger="interval", days=1)
     scheduler.start()
@@ -34,5 +45,4 @@ def update_data():
 
 
 if __name__ == '__main__':
-    update_data()
     app.run(debug=True)

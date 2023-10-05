@@ -721,7 +721,7 @@ label:hover {
 #dateId {
   font-weight: bold;
   font-size: 16px;
-  color: #fcf6f6;
+  color: #030303;
   padding: 8px; /* Add padding to the label */
   border-radius: 4px; /* Rounded corners */
 }
@@ -731,7 +731,7 @@ input[type="date"] {
   border: 2px solid #f1f1f1;
   border-radius: 6px;
   font-size: 16px;
-  color: #fcfcfc;
+  color: #020202;
   background-color: rgba(
     0,
     0,
