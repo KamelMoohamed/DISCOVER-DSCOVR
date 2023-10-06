@@ -31,7 +31,18 @@ document.addEventListener("DOMContentLoaded", function () {
   dateInput.addEventListener("input", function () {
     var selectedDate = dateInput.value;
     console.log(selectedDate);
-    //TODO: Add action when date is chosen
+    $.ajax({
+      type: "GET",
+      url: `/predication/${selectedDate}`,
+      contentType: false,
+      cache: false,
+      processData: false,
+      async: true,
+      success: function (data) {
+        // Get and display the result
+        plot(data);
+      },
+    });
   });
 });
 

@@ -6,7 +6,7 @@ import netCDF4
 import numpy as np
 import pandas as pd
 
-def ftech_data(start_date_string): 
+def fetch_data(start_date_string): 
     #date as "2021-10-05"
     print(start_date_string)
     modified_string = start_date_string.replace("-", "")
@@ -40,7 +40,7 @@ def ftech_data(start_date_string):
                 extracted_file.write(compressed_file.read())
 
         data_nc = netCDF4.Dataset(output_path)
-        dsc_cols = ['time', 'bx_gse','by_gse', 'bz_gse', 'bx_gsm', 'by_gsm', 'bz_gsm']
+        dsc_cols = ['bx_gse','by_gse', 'bz_gse', 'bx_gsm', 'by_gsm', 'bz_gsm']
         arrays = {}
         for col in dsc_cols:
             var = data_nc.variables[col]
