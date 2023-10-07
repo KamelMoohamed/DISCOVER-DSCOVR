@@ -5,7 +5,7 @@ import gzip
 import netCDF4
 import numpy as np
 import pandas as pd
-
+import tensorflow as tf
 
 def fetch_data(start_date_string):
     # date as "2021-10-05"
@@ -49,7 +49,12 @@ def fetch_data(start_date_string):
             var = data_nc.variables[col]
             arrays[f'dsc_{col}'] = np.array(var[::92])
         data_df = pd.DataFrame(arrays)
-        data_df.to_csv("downloads/processed/" +
+        processed_data = sequence_creation(data_df.values)
+        model = tf.keras.models.load_model("models/mapping_mag.h5")
+        mapped_data = model.predict(processed_data)
+
+
+        mapped_data.to_csv("downloads/processed/" +
                        modified_string+".csv", index=False)
         # os.remove(input_path)
         # os.remove(output_path)
@@ -64,3 +69,18 @@ def forcast_data(data, model, size=100):
         data = np.append(data[1:], point).reshape(-1, n_features)
 
     return output
+
+
+
+
+def sequence_creation(data, num_features=6, sequence_length=10):
+  sequences = []
+  for i in range(len(data) - sequence_length + 1):
+    sequence = data[i:i + sequence_length]
+    sequences.append(sequence)
+
+  sequences = np.array(sequences)
+  output = sequences.reshape(-1, sequence_length, num_features)
+
+  return output
+
