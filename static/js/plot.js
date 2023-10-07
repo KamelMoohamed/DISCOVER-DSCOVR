@@ -9,7 +9,7 @@ function plot(data) {
     { min: 5, max: 6, color: "yellow" },
     { min: 6, max: 7, color: "orange" },
     { min: 7, max: 8, color: "red" },
-    { min: 8, max: 15, color: "#8c0808" },
+    { min: 8, max: 10, color: "#8c0808" },
   ];
 
   // Create an array to hold the colors based on y values
@@ -27,13 +27,8 @@ function plot(data) {
     {
       x: x,
       y: y,
-      mode: "lines+markers",
+      mode: "lines",
       type: "scatter",
-      marker: {
-        color: colors, // Marker color
-        size: 10, // Marker size
-        symbol: "circle", // Marker symbol (options: 'circle', 'square', 'diamond', 'cross', etc.)
-      },
       line: {
         color: "grey",
       },
@@ -60,7 +55,7 @@ function plot(data) {
   var layout = {
     title: "Kp Index",
     xaxis: {
-      title: "Time",
+      title: "Day hours",
     },
     yaxis: {
       title: "",
