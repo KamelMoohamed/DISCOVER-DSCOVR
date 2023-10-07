@@ -6,16 +6,18 @@ import netCDF4
 import numpy as np
 import pandas as pd
 
-def fetch_data(start_date_string): 
-    #date as "2021-10-05"
+
+def fetch_data(start_date_string):
+    # date as "2021-10-05"
     print(start_date_string)
     modified_string = start_date_string.replace("-", "")
     if not os.path.exists("downloads/processed/"+modified_string+".csv"):
+        print("downloads/processed/"+modified_string+".csv")
         start_date_obj = datetime.strptime(start_date_string, '%Y-%m-%d')
-        start_timestamp = int(start_date_obj.timestamp()) *1000
+        start_timestamp = int(start_date_obj.timestamp()) * 1000
         end_timestamp = int(start_timestamp+172799999000)
-        api_url = "https://www.ngdc.noaa.gov/dscovr-data-access/files?start_date="+str(start_timestamp)+"&end_date="+str(end_timestamp)
-        print(api_url)
+        api_url = "https://www.ngdc.noaa.gov/dscovr-data-access/files?start_date=" + \
+            str(start_timestamp)+"&end_date="+str(end_timestamp)
         try:
             response = requests.get(api_url)
 
@@ -27,12 +29,13 @@ def fetch_data(start_date_string):
             print(f"Request error: {e}")
         except ValueError as e:
             print(f"JSON decoding error: {e}")
-        
-        print(data)
+
         response = requests.get(data[str(modified_string)]["mg1"])
 
-        input_path = os.path.join("downloads","raw_data", (str(modified_string) + ".nc.gz"))
-        output_path = os.path.join("downloads","raw_data", (str(modified_string) + ".nc"))
+        input_path = os.path.join(
+            "downloads", "raw_data", (str(modified_string) + ".nc.gz"))
+        output_path = os.path.join(
+            "downloads", "raw_data", (str(modified_string) + ".nc"))
 
         open(input_path, "wb").write(response.content)
         with gzip.open(input_path, 'rb') as compressed_file:
@@ -40,24 +43,24 @@ def fetch_data(start_date_string):
                 extracted_file.write(compressed_file.read())
 
         data_nc = netCDF4.Dataset(output_path)
-        dsc_cols = ['bx_gse','by_gse', 'bz_gse', 'bx_gsm', 'by_gsm', 'bz_gsm']
+        dsc_cols = ['bx_gse', 'by_gse', 'bz_gse', 'bx_gsm', 'by_gsm', 'bz_gsm']
         arrays = {}
         for col in dsc_cols:
             var = data_nc.variables[col]
             arrays[f'dsc_{col}'] = np.array(var[::92])
-        data_df= pd.DataFrame(arrays)
-        data_df.to_csv("downloads/processed/"+modified_string+".csv", index=False)
+        data_df = pd.DataFrame(arrays)
+        data_df.to_csv("downloads/processed/" +
+                       modified_string+".csv", index=False)
         # os.remove(input_path)
         # os.remove(output_path)
 
 
+def forcast_data(data, model, size=100):
+    n_features = data.shape[1]
+    output = np.zeros((size, data.shape[1]))
+    for i in range(size):
+        point = model(np.array([data]))[0]
+        output[i] = point
+        data = np.append(data[1:], point).reshape(-1, n_features)
 
-def forcast_data(data, model,size = 100):
-  n_features = data.shape[1]
-  output = np.zeros((size, data.shape[1]))
-  for i in range(size):
-    point = model(np.array([data]))[0]
-    output[i] = point
-    data = np.append(data[1:], point).reshape(-1, n_features)
-
-  return output
+    return output

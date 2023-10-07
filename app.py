@@ -3,14 +3,16 @@ import atexit
 from flask import Flask, render_template, Response, request, jsonify
 import datetime
 import data
-# import tensorflow as tf
+import tensorflow as tf
 from apscheduler.schedulers.background import BackgroundScheduler
 import pandas as pd
 import numpy as np
-from tensorflow.keras.models import load_model
+from tensorflow import keras
+from keras.models import load_model
 from transformers import TFBertModel
 from scipy import signal
 
+# Initialize Flask
 
 app = Flask(__name__, template_folder="templetes")
 
@@ -22,33 +24,53 @@ def index():
 
 @app.route('/predication/<date>', methods=['GET'])
 def predict(date):
-    data.fetch_data(date)
-    file_path = f'downloads/processed/{date.replace("-", "")}'
-    df = pd.read_csv(file_path)
+    global prediction_model  # Use the global variable
 
-    custom_objects = {'TFBertModel': TFBertModel}
+    file_path = f'downloads/prediction/{date.replace("-", "")}.csv'
 
-    model = load_model('models/kp_prediction.h5', custom_objects)
-    output = model(df.values)
+    output_y = []
+    output_x = []
+    if not os.path.exists(file_path):
+        file_path = f'downloads/processed/{date.replace("-", "")}.csv'
+        data.fetch_data(date)
+        df = pd.read_csv(file_path)
+        custom_objects = {'TFBertModel': TFBertModel}
+        prediction_model = load_model(
+            'models/kp_prediction.h5', custom_objects)
 
-    output_y = signal.resample(output, 500)
-    output_x = np.linspace(0, len(output), len(output))
+        output = prediction_model.predict(df)
 
-    data1 = np.linspace(0,500,500)    
-    return jsonify({"x":output_x.tolist(), 'y':output_y.tolist()})
+        output_y = signal.resample(output, 500)
+        output_x = np.linspace(0, len(output), len(output))
+        out_df = pd.DataFrame({'x': output_x, 'y': output_y})
+        out_df.to_csv(file_path.replace('processed', 'prediction'))
+    else:
+        df = pd.read_csv(file_path)
+        output_y = df['y'].values
+        output_x = np.linspace(0, 24, len(output_y))
+
+    # data1 = np.linspace(0, 500, 500)
+    return jsonify({"x": output_x.tolist(), 'y': output_y.tolist()})
 
 
 @app.route('/forcast/<date>/<size>', methods=['GET'])
-def forcast_api(date,size):
+def forcast_api(date, size):
     date2 = f'{date[0:4]}-{date[4:6]}-{date[6:]}'
     data.fetch_data(date2)
-    # model = tf.keras.models.load_model('models\forecasting_model.h5')
+    model = tf.keras.models.load_model('models/forecasting_model.h5')
     df = pd.read_csv(f'downloads/processed/{date}.csv')
-    df.drop(columns='dsc_time', axis = 1, inplace = True)
     columns = df.columns
-    # output = data.forcast_data(df.values[-70:],size)
+    output = data.forcast_data(df.values[-70:], model, int(size))
     output = df.values[-70:]
-    return jsonify({"columns name": columns.to_list(),'data' :output.tolist()})
+    return jsonify({"columns name": columns.to_list(), 'data': output.tolist()})
+
+@app.route("/data/<date>", methods = ['GET'])
+def return_data(date):
+    date2 = f'{date[0:4]}-{date[4:6]}-{date[6:]}'
+    data.fetch_data(date2)
+    df = pd.read_csv(f'downloads/processed/{date}.csv')
+    dict_df = df.to_dict(orient='list')
+    return jsonify(dict_df)
 
 
 def update_data():
@@ -56,7 +78,8 @@ def update_data():
     yesterday = current_date - datetime.timedelta(days=1)
     formatted_date = yesterday.strftime("%Y-%m-%d")
     scheduler = BackgroundScheduler()
-    scheduler.add_job(func=data.fetch_data(formatted_date), trigger="interval", days=1)
+    scheduler.add_job(func=data.fetch_data(
+        formatted_date), trigger="interval", days=1)
     scheduler.start()
     atexit.register(lambda: scheduler.shutdown())
 
