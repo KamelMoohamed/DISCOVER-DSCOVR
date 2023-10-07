@@ -739,3 +739,6 @@ input[type="date"] {
     0.1
   ); /* Transparent background color for input */
 }
+.image-margin {
+  margin-right: 200px;
+}
